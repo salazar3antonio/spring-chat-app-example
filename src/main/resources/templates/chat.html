@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Chat</title>
+</head>
+<body>
+<div id="logoutDiv">
+    <form action="#" th:action="@{/logout}" method="POST">
+        <button type="submit" class="btn btn-secondary float-right" id="logout-button">Logout</button>
+    </form>
+</div>
+<form th:object="${chatForm}" action="#" th:action="@{/chat}" method="POST">
+    <label for="messageText">Message Text:</label>
+    <input id="messageText" type="text" th:field="*{messageText}">
+    <label for="messageType">Message Type: </label>
+    <select id="messageType" th:field="*{messageType}">
+        <option
+            th:each="type : ${allMessageTypes}"
+            th:value="${type}"
+            th:text="${type}"
+        >
+            Say
+        </option>
+    </select>
+    <input type="submit">
+</form>
+<div th:each="chatMessage : ${chatMessages}">
+    <span th:text="${chatMessage.username}">Username</span>: <span th:text="${chatMessage.messageText}">Hello, world!</span>
+    <div>
+        <button
+                th:alert-username="${chatMessage.username}"
+                th:alert-messageText="${chatMessage.messageText}"
+
+                th:onclick="reportMessageAlert(this.getAttribute('alert-username'), this.getAttribute('alert-messageText'))"
+
+                type="button" class="btn btn-success" name="alert-btn" id="alert-btn">Report Message
+        </button>
+    </div>
+</div>
+
+
+<!--For alerting our user-->
+<script type="text/javascript">
+
+            // Show an alert to our user so they can report the message
+            function reportMessageAlert(username, message) {
+            var dateTime = getCurrentDateAndTime();
+                window.alert('Would you like to report ' + username + ' who said ' + message + ' on ' + dateTime);
+            }
+
+            // Gets the current date and time and formats it
+            function getCurrentDateAndTime() {
+                var today = new Date();
+                var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+                var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+                return date+' '+time;
+            }
+        </script>
+
+</body>
+</html>
