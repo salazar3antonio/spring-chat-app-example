@@ -5,9 +5,10 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/bootstrap.min.css}">
     <title>Chat</title>
 </head>
-<body>
+<body class="m-5">
 <div id="logoutDiv">
     <form action="#" th:action="@{/logout}" method="POST">
         <button type="submit" class="btn btn-secondary float-right" id="logout-button">Logout</button>
@@ -28,7 +29,9 @@
     </select>
     <input type="submit">
 </form>
+<hr class="solid">
 <div th:each="chatMessage : ${chatMessages}">
+    <div th:text="${chatMessage.timeStamp}" class="font-weight-bold">Timestamp</div>
     <span th:text="${chatMessage.username}">Username</span>: <span th:text="${chatMessage.messageText}">Hello, world!</span>
     <div>
         <button
@@ -37,9 +40,10 @@
 
                 th:onclick="reportMessageAlert(this.getAttribute('alert-username'), this.getAttribute('alert-messageText'))"
 
-                type="button" class="btn btn-success" name="alert-btn" id="alert-btn">Report Message
+                type="button" class="btn btn-warning" name="alert-btn" id="alert-btn">Report Message
         </button>
     </div>
+    <hr class="solid">
 </div>
 
 

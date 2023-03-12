@@ -1,0 +1,9 @@
+body {
+    background-color: #D3D3D3;
+}
+hr.solid {
+  border-top: 2px solid #bbb;
+}
+.bolded {
+    font-weight: bold;
+}

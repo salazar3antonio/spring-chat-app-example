@@ -6,6 +6,8 @@ import com.udacity.jwdnd.c1.review.model.ChatMessage;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 @Service
@@ -36,6 +38,7 @@ public class MessageService {
                 newMessage.setMessageText(chatForm.getMessageText().toLowerCase());
                 break;
         }
+        newMessage.setTimeStamp(new SimpleDateFormat("yyyy-MM-dd HH:mm").format(Calendar.getInstance().getTime()));
         messageMapper.addMessage(newMessage);
     }
 
